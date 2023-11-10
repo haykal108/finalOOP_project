@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Dictionary App</title>
+  <link rel="stylesheet" href="index.css">
+  
+  <style>
+    h1 {
+      color: blue; /* Change to your desired color (e.g., red, green, etc.) */
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Dictionary App</h1>
+  </header>
+  <main>
+    <div id="search-container">
+      <input type="text" id="word-input" placeholder="Enter a word"><br><br>
+      <button id="search-button">Search</button>
+    </div>
+    <div id="word-definition">
+      <h2>Word Definition</h2>
+      <div id="meaning-noun"></div>
+      <div id="meaning-adjective"></div>
+      <div id="antonyms"></div>
+      <div id="examples"></div>
+      <div id="related-urls"></div>
+      <div id="synonyms"></div>
+      <audio id="wordAudio" controls></audio>
+    </div>
+    <br>
+
+    <button onclick="window.location.href='display.html';">Copy the information and paste this page</button><br><br>
+    <button onclick="window.location.href='word.html';">WORD OF THE DAY</button>
+
+  </main>
+  <script>
+    function searchWordDefinition() {
+      var word = document.getElementById('word-input').value;
+      var xhr = new XMLHttpRequest();
+      xhr.open('GET', 'https://api.datamuse.com/words?rel_syn=' + word + '&max=5', true);
+      xhr.onload = function() {
+        if (this.status == 200) {
+          var data = JSON.parse(this.responseText);
+          document.getElementById('synonyms').innerHTML = 'Synonyms: ' + data.map(function(d) { return d.word; }).join(', ');
+        }
+      };
+      xhr.send();
+    }
+
+    document.getElementById('search-button').addEventListener('click', searchWordDefinition);
+ </script>
+  
+  <script src="main.js"></script>
+</body>
+</html>

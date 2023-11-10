@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Word of the Day</title>
+    <link rel="stylesheet" href="word.css">
+</head>
+<body>
+    <div class="word-box">
+    <h1 id="word-of-the-day"></h1>
+    <p id="word-definition"></p>
+    <a href="index.html">back to home</a>
+    </div>
+
+    <script>
+        // Assuming you have a list of words for each day
+        const wordOfTheDayList = [
+            { word: 'serendipity', definition: 'the occurrence and development of events by chance in a happy or beneficial way.' },
+            { word: 'ephemeral', definition: 'lasting for a very short time.' },
+            { word: 'quixotic', definition: 'exceedingly idealistic; unrealistic and impractical.' },
+            // ... add more words here
+        ];
+
+        // Get the current date
+        const currentDate = new Date();
+        const dayOfMonth = currentDate.getDate();
+
+        // Get the word of the day based on the day of the month
+        const wordOfTheDay = wordOfTheDayList[dayOfMonth % wordOfTheDayList.length];
+
+        // Display the word and its definition
+        document.getElementById('word-of-the-day').textContent = `Word of the Day: ${wordOfTheDay.word}`;
+        document.getElementById('word-definition').textContent = wordOfTheDay.definition;
+    </script>
+
+     
+</body>
+</html>
